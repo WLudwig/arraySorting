@@ -1,5 +1,5 @@
 
-//Author: William Ludwig u0905218
+//Author: William Ludwig
 
 public class arraySort{
 	
@@ -9,6 +9,7 @@ public class arraySort{
 		
 		//Create a random array
 		int[] sortMe = new int[100];
+		//int[] sorted = new int[100];
 		for(int i = 0; i < 100; i++)
 		{
 			sortMe[i] = (int)(Math.random() * ((1000 - 0) + 1)) + 0;
@@ -20,8 +21,10 @@ public class arraySort{
 		isSorted(sortMe);
 		
 		//Sort it
+		selectionSort(sortMe);
 		
 		//Check to see if it is now sorted
+		isSorted(sortMe);
 
 		
 	}
@@ -46,6 +49,29 @@ public class arraySort{
 				
 		}
 		System.out.println("Array is sorted!");
+	}
+	
+	///A function that performs Selection Sort on the passed in Array
+	///Parameter: int[] - the array that is to be sorted
+	public static void selectionSort(int[] arr)
+	{ 
+		System.out.println("Performing Selection Sort!");
+		int length = arr.length;
+		
+		//Iterate through the array finding the smallest remaining element and adding it to the end of the sorted portion
+		for(int i = 0; i < length-1; i++)
+		{
+			int indexOfMin = i;
+			for(int j = i+1; j<length; j++)
+			{
+				if(arr[j]<arr[indexOfMin])
+					indexOfMin = j;
+			}
+			
+			int tempValue = arr[indexOfMin];
+			arr[indexOfMin] = arr[i];
+			arr[i] = tempValue;
+		}
 	}
 }
 	
