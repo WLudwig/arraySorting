@@ -16,8 +16,9 @@ public class arraySort {
 		isSorted(sortMe);
 
 		// Sort it
-		// selectionSort(sortMe);S
-		insertionSort(sortMe);
+		// selectionSort(sortMe);
+		//insertionSort(sortMe);
+		bubbleSort(sortMe);
 
 		// Check to see if it is now sorted
 		isSorted(sortMe);
@@ -80,4 +81,23 @@ public class arraySort {
 			arr[prev + 1] = key;
 		}
 	}
+	
+	/// A function that performs Bubble Sort on the passed in Array
+		/// Parameter: int[] - the array that is to be sorted
+		public static void bubbleSort(int[] arr) {
+			System.out.println("Performing Bubble Sort!");
+			int length = arr.length;
+
+			for (int i = 0; i < length-1; i++) {
+				for(int j = 0; j<length-i-1; j++)
+				{
+					if(arr[j]>arr[j+1])
+					{
+						int temp = arr[j];
+						arr[j]=arr[j+1];
+						arr[j+1] = temp;
+					}
+				}
+			}
+		}
 }
