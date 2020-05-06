@@ -21,7 +21,8 @@ public class arraySort{
 		isSorted(sortMe);
 		
 		//Sort it
-		selectionSort(sortMe);
+		//selectionSort(sortMe);S
+		insertionSort(sortMe);
 		
 		//Check to see if it is now sorted
 		isSorted(sortMe);
@@ -73,6 +74,28 @@ public class arraySort{
 			arr[i] = tempValue;
 		}
 	}
+	
+	///A function that performs Selection Sort on the passed in Array
+		///Parameter: int[] - the array that is to be sorted
+		public static void insertionSort(int[] arr)
+		{ 
+			System.out.println("Performing Insertion Sort!");
+			int length = arr.length;
+			
+			for(int i=1; i< length; ++i)
+			{
+				int key = arr[i];
+				int prev = i-1;
+				
+				//check and see if previous elements are greater then current element and move them ahead
+				while(prev>=0 && arr[prev]>key)
+				{
+					arr[prev+1] = arr[prev];
+					prev = prev - 1;
+				}
+				arr[prev+1] = key;
+			}
+		}
 }
 	
 	
