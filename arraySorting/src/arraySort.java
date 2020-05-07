@@ -17,8 +17,9 @@ public class arraySort {
 
 		// Sort it
 		// selectionSort(sortMe);
-		//insertionSort(sortMe);
-		bubbleSort(sortMe);
+		// insertionSort(sortMe);
+		//bubbleSort(sortMe);
+		bubbleSortRecursive(sortMe, sortMe.length);
 
 		// Check to see if it is now sorted
 		isSorted(sortMe);
@@ -81,23 +82,43 @@ public class arraySort {
 			arr[prev + 1] = key;
 		}
 	}
-	
-	/// A function that performs Bubble Sort on the passed in Array
-		/// Parameter: int[] - the array that is to be sorted
-		public static void bubbleSort(int[] arr) {
-			System.out.println("Performing Bubble Sort!");
-			int length = arr.length;
 
-			for (int i = 0; i < length-1; i++) {
-				for(int j = 0; j<length-i-1; j++)
-				{
-					if(arr[j]>arr[j+1])
-					{
-						int temp = arr[j];
-						arr[j]=arr[j+1];
-						arr[j+1] = temp;
-					}
+	/// A function that performs Bubble Sort on the passed in Array
+	/// Parameter: int[] - the array that is to be sorted
+	public static void bubbleSort(int[] arr) {
+		System.out.println("Performing Bubble Sort!");
+		int length = arr.length;
+
+		for (int i = 0; i < length - 1; i++) {
+			for (int j = 0; j < length - i - 1; j++) {
+				if (arr[j] > arr[j + 1]) {
+					int temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
 				}
 			}
 		}
+	}
+
+	/// A function that performs Bubble Sort Recursively on the passed in Array
+	/// Parameter: int[] - the array that is to be sorted
+	public static void bubbleSortRecursive(int[] arr, int n) {
+		//System.out.println("Performing a pass of Bubble Sort Recursive!");
+
+		// base case
+		if (n == 1)
+			return;
+
+		// perform bubble sort once
+		for (int i = 0; i < n - 1; i++) {
+			if (arr[i] > arr[i + 1]) {
+				int temp = arr[i];
+				arr[i] = arr[i + 1];
+				arr[i + 1] = temp;
+			}
+		}
+		// largest element is good. Continue on
+		bubbleSortRecursive(arr, n - 1);
+
+	}
 }
