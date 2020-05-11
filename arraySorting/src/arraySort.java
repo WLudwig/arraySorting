@@ -20,7 +20,8 @@ public class arraySort {
 		// insertionSort(sortMe);
 		//bubbleSort(sortMe);
 		//bubbleSortRecursive(sortMe, sortMe.length);
-		insertionSortRecursive(sortMe, sortMe.length);
+		//insertionSortRecursive(sortMe, sortMe.length);
+		countingSort(sortMe);
 
 		// Check to see if it is now sorted
 		isSorted(sortMe);
@@ -147,6 +148,45 @@ public class arraySort {
 		}
 		// largest element is good. Continue on
 		bubbleSortRecursive(arr, length - 1);
+
+	}
+	
+	/// A function that performs Counting Sort on the passed in Array
+	/// Parameters: int[] - the array that is to be sorted
+	public static void countingSort(int[] arr) {
+		System.out.println("Performing Counting Sort!");
+
+		int length = arr.length;
+		
+		//create a new array that will be the sorted array
+		int[] resultArray = new int[length];
+		
+		//create a new array for keeping count and set everything to 0
+        int count[] = new int[1000]; 
+        for (int i=0; i<1000; ++i) 
+            count[i] = 0; 
+        
+        //go through the entire array and update counts
+        for(int value: arr)
+        {
+        	++count[value];
+        }
+        
+        //make it reflect the actual position
+        for (int i=1; i<=999; ++i) 
+            count[i] += count[i-1]; 
+        
+        //put everything into the resultArray
+        for (int i = length-1; i>=0; i--) 
+        { 
+            resultArray[count[arr[i]]-1] = arr[i]; 
+            --count[arr[i]]; 
+        } 
+        
+        //copy sorted array into original array
+        for (int i = 0; i<length; ++i) 
+            arr[i] = resultArray[i]; 
+        
 
 	}
 }
