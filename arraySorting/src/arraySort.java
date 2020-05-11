@@ -1,5 +1,8 @@
-
-//Author: William Ludwig
+/// This file contains the following sorting methods:
+/// Selection Sort, Insertion Sort, Insertion Sort Recursive,
+/// Bubble Sort,  Bubble Sort Recursive, Counting Sort
+/// 
+/// Author: William Ludwig
 
 public class arraySort {
 
@@ -18,9 +21,9 @@ public class arraySort {
 		// Sort it
 		// selectionSort(sortMe);
 		// insertionSort(sortMe);
-		//bubbleSort(sortMe);
-		//bubbleSortRecursive(sortMe, sortMe.length);
-		//insertionSortRecursive(sortMe, sortMe.length);
+		// bubbleSort(sortMe);
+		// bubbleSortRecursive(sortMe, sortMe.length);
+		// insertionSortRecursive(sortMe, sortMe.length);
 		countingSort(sortMe);
 
 		// Check to see if it is now sorted
@@ -84,31 +87,31 @@ public class arraySort {
 			arr[prev + 1] = key;
 		}
 	}
-	
-	/// A function that performs Insertion Sort Recursively on the passed in Array
+
+	/// A function that performs Insertion Sort Recursively on the passed in
+	/// Array
 	/// Parameters: int[] - the array that is to be sorted
-	///				int length - the length of the array
+	/// int length - the length of the array
 	public static void insertionSortRecursive(int[] arr, int length) {
-		//System.out.println("Performing a pass of Bubble Sort Recursive!");
+		// System.out.println("Performing a pass of Bubble Sort Recursive!");
 
 		// base case
 		if (length <= 1)
 			return;
 
 		// sort the first length -1 items
-		insertionSortRecursive(arr, length -1);
+		insertionSortRecursive(arr, length - 1);
 
-		//insert las element
-		int last = arr[length-1];
+		// insert las element
+		int last = arr[length - 1];
 		int next = length - 2;
-		
-		//move elements that are greater than last ahead one spot in array
-		while(next >=0 && arr[next] > last)
-		{
-			arr[next+1]= arr[next];
+
+		// move elements that are greater than last ahead one spot in array
+		while (next >= 0 && arr[next] > last) {
+			arr[next + 1] = arr[next];
 			next--;
 		}
-		arr[next+1] = last;
+		arr[next + 1] = last;
 	}
 
 	/// A function that performs Bubble Sort on the passed in Array
@@ -130,9 +133,9 @@ public class arraySort {
 
 	/// A function that performs Bubble Sort Recursively on the passed in Array
 	/// Parameters: int[] - the array that is to be sorted
-	///				int length - the length of the array
+	/// int length - the length of the array
 	public static void bubbleSortRecursive(int[] arr, int length) {
-		//System.out.println("Performing a pass of Bubble Sort Recursive!");
+		// System.out.println("Performing a pass of Bubble Sort Recursive!");
 
 		// base case
 		if (length == 1)
@@ -150,43 +153,40 @@ public class arraySort {
 		bubbleSortRecursive(arr, length - 1);
 
 	}
-	
+
 	/// A function that performs Counting Sort on the passed in Array
 	/// Parameters: int[] - the array that is to be sorted
 	public static void countingSort(int[] arr) {
 		System.out.println("Performing Counting Sort!");
 
 		int length = arr.length;
-		
-		//create a new array that will be the sorted array
+
+		// create a new array that will be the sorted array
 		int[] resultArray = new int[length];
-		
-		//create a new array for keeping count and set everything to 0
-        int count[] = new int[1000]; 
-        for (int i=0; i<1000; ++i) 
-            count[i] = 0; 
-        
-        //go through the entire array and update counts
-        for(int value: arr)
-        {
-        	++count[value];
-        }
-        
-        //make it reflect the actual position
-        for (int i=1; i<=999; ++i) 
-            count[i] += count[i-1]; 
-        
-        //put everything into the resultArray
-        for (int i = length-1; i>=0; i--) 
-        { 
-            resultArray[count[arr[i]]-1] = arr[i]; 
-            --count[arr[i]]; 
-        } 
-        
-        //copy sorted array into original array
-        for (int i = 0; i<length; ++i) 
-            arr[i] = resultArray[i]; 
-        
+
+		// create a new array for keeping count and set everything to 0
+		int count[] = new int[1000];
+		for (int i = 0; i < 1000; ++i)
+			count[i] = 0;
+
+		// go through the entire array and update counts
+		for (int value : arr) {
+			++count[value];
+		}
+
+		// make it reflect the actual position
+		for (int i = 1; i <= 999; ++i)
+			count[i] += count[i - 1];
+
+		// put everything into the resultArray
+		for (int i = length - 1; i >= 0; i--) {
+			resultArray[count[arr[i]] - 1] = arr[i];
+			--count[arr[i]];
+		}
+
+		// copy sorted array into original array
+		for (int i = 0; i < length; ++i)
+			arr[i] = resultArray[i];
 
 	}
 }
