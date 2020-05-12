@@ -1,7 +1,7 @@
 /// This file contains the following sorting methods:
 /// Selection Sort, Insertion Sort, Insertion Sort Recursive,
 /// Bubble Sort,  Bubble Sort Recursive, Counting Sort,
-/// Shell Sort, 
+/// Shell Sort, Comb Sort 
 /// 
 /// Author: William Ludwig
 
@@ -25,8 +25,9 @@ public class arraySort {
 		// bubbleSort(sortMe);
 		// bubbleSortRecursive(sortMe, sortMe.length);
 		// insertionSortRecursive(sortMe, sortMe.length);
-		//countingSort(sortMe);
-		shellSort(sortMe);
+		// countingSort(sortMe);
+		// shellSort(sortMe);
+		combSort(sortMe);
 
 		// Check to see if it is now sorted
 		isSorted(sortMe);
@@ -191,27 +192,62 @@ public class arraySort {
 			arr[i] = resultArray[i];
 
 	}
-	
+
 	/// A function that performs Shell Sort on the passed in Array
-		/// Parameters: int[] - the array that is to be sorted
-		public static void shellSort(int[] arr) {
-			System.out.println("Performing Shell Sort!");
+	/// Parameters: int[] - the array that is to be sorted
+	public static void shellSort(int[] arr) {
+		System.out.println("Performing Shell Sort!");
 
-			int length = arr.length;
+		int length = arr.length;
 
-			//start with a big group and then reduce it
-			for(int gap = length/2; gap > 0; gap /=2)
-			{
-				for(int i = gap; i < length; i++)
-				{
+		// start with a big group and then reduce it
+		for (int gap = length / 2; gap > 0; gap /= 2) {
+			for (int i = gap; i < length; i++) {
+				int temp = arr[i];
+				int next;
+				for (next = i; next >= gap && arr[next - gap] > temp; next -= gap) {
+					arr[next] = arr[next - gap];
+				}
+				arr[next] = temp;
+			}
+		}
+	}
+
+	/// A function that performs Comb Sort on the passed in Array
+	/// Parameters: int[] - the array that is to be sorted
+	public static void combSort(int[] arr) {
+		System.out.println("Performing Comb Sort!");
+
+		int length = arr.length;
+		// initialize gap
+		int gap = length;
+
+		boolean loop = true;
+
+		while (gap != 1 || loop == true) {
+			gap = findNextGap(gap);
+
+			loop = false;
+
+			for (int i = 0; i < length - gap; i++) {
+				if (arr[i] > arr[i + gap]) {
+					// swap the values
 					int temp = arr[i];
-					int next;
-					for(next =i; next >= gap && arr[next - gap] > temp; next -= gap)
-					{
-						arr[next] = arr[next - gap];
-					}
-					arr[next] = temp;
+					arr[i] = arr[i + gap];
+					arr[i + gap] = temp;
+
+					loop = true;
 				}
 			}
 		}
+
+	}
+
+	// helper method to find the nextGap for Comb Sort
+	private static int findNextGap(int currentGap) {
+		currentGap = (currentGap * 10) / 13;
+		if (currentGap < 1)
+			return 1;
+		return currentGap;
+	}
 }
