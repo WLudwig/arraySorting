@@ -1,6 +1,7 @@
 /// This file contains the following sorting methods:
 /// Selection Sort, Insertion Sort, Insertion Sort Recursive,
-/// Bubble Sort,  Bubble Sort Recursive, Counting Sort
+/// Bubble Sort,  Bubble Sort Recursive, Counting Sort,
+/// Shell Sort, 
 /// 
 /// Author: William Ludwig
 
@@ -24,7 +25,8 @@ public class arraySort {
 		// bubbleSort(sortMe);
 		// bubbleSortRecursive(sortMe, sortMe.length);
 		// insertionSortRecursive(sortMe, sortMe.length);
-		countingSort(sortMe);
+		//countingSort(sortMe);
+		shellSort(sortMe);
 
 		// Check to see if it is now sorted
 		isSorted(sortMe);
@@ -189,4 +191,27 @@ public class arraySort {
 			arr[i] = resultArray[i];
 
 	}
+	
+	/// A function that performs Shell Sort on the passed in Array
+		/// Parameters: int[] - the array that is to be sorted
+		public static void shellSort(int[] arr) {
+			System.out.println("Performing Shell Sort!");
+
+			int length = arr.length;
+
+			//start with a big group and then reduce it
+			for(int gap = length/2; gap > 0; gap /=2)
+			{
+				for(int i = gap; i < length; i++)
+				{
+					int temp = arr[i];
+					int next;
+					for(next =i; next >= gap && arr[next - gap] > temp; next -= gap)
+					{
+						arr[next] = arr[next - gap];
+					}
+					arr[next] = temp;
+				}
+			}
+		}
 }
